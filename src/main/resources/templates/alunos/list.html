@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script defer src="./fonts/js/all.js"></script>
+</head>
+
+<body style="margin: 2rem">
+
+<div class="container">
+    <div style="margin-bottom: 1rem">
+        <a class="btn btn-outline-primary" href="/alunos/form">
+            <i class="fas fa-plus btn-outline-primary"></i>
+            <span class="btn-outline-primary">Adicionar Aluno</span>
+        </a>
+
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Alterar</th>
+                <th scope="col">Excluir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="aluno : ${alunos}">
+                <th scope="row" th:text="${aluno.id}"/>
+                <td th:text="${aluno.nome}"/>
+                <td th:text="${aluno.email}"/>
+                <td>
+                    <a th:href="@{/alunos/editar/{id}(id=${aluno.id})}">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/alunos/delete/{id}(id=${aluno.id})}">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
