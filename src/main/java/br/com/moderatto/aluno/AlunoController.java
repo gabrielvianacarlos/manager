@@ -3,10 +3,12 @@ package br.com.moderatto.aluno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Random;
 
 @Controller
 @RequestMapping("/alunos")
@@ -34,14 +36,14 @@ public class AlunoController {
         return new ModelAndView("redirect:/alunos");
     }
 
-    @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editar(@PathVariable("id") long id, Model model) {
         AlunoDTO aluno = alunoService.getById(id);
         model.addAttribute("aluno", aluno);
         return "alunos/update";
     }
 
-    @RequestMapping(value = "/editar/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public ModelAndView update(@PathVariable("id") long id, AlunoDTO aluno, Model model) {
         alunoService.salvar(aluno);
         return new ModelAndView("redirect:/alunos");

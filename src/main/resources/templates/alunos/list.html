@@ -22,7 +22,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-striped">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -38,7 +38,7 @@
                 <td th:text="${aluno.nome}"/>
                 <td th:text="${aluno.email}"/>
                 <td>
-                    <a th:href="@{/alunos/editar/{id}(id=${aluno.id})}">
+                    <a th:href="@{/alunos/edit/{id}(id=${aluno.id})}">
                         <i class="fas fa-edit"></i>
                     </a>
                 </td>

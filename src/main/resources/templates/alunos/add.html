@@ -15,12 +15,12 @@
     <form action="#" th:action="@{/alunos/add}" method="post" th:object="${aluno}">
         <div class="form-group">
             <label for="inputNome">Nome</label>
-            <input type="text" th:field="*{nome}" class="form-control" id="inputNome" name="nome"
+            <input type="text" th:field="*{nome}" class="form-control" id="inputNome"
                    placeholder="Digite o nome completo">
         </div>
         <div class="form-group">
             <label for="inputEmail">E-mail</label>
-            <input type="email" th:field="*{email}" class="form-control" id="inputEmail" name="email"
+            <input type="email" th:field="*{email}" class="form-control" id="inputEmail"
                    placeholder="Digite o email">
         </div>
 

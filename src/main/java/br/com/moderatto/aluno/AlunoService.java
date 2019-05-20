@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @Component
 public class AlunoService {
@@ -40,20 +39,26 @@ public class AlunoService {
             repository.save(aluno);
         } else {
             Optional<Aluno> alunoOptional = repository.findById(alunoDTO.getId());
-            alunoOptional.get().setNome(alunoDTO.getNome());
-            alunoOptional.get().setEmail(alunoDTO.getEmail());
-            repository.save(alunoOptional.get());
+            alunoOptional.ifPresent(aluno -> {
+                aluno.setNome(alunoDTO.getNome());
+                aluno.setEmail(alunoDTO.getEmail());
+                repository.save(aluno);
+            });
         }
     }
 
 
     public AlunoDTO getById(Long id) {
-        Aluno aluno = this.repository.findById(id).get();
-        return new AlunoDTO.AlunoDTOBuilder().nome(aluno.getNome()).email(aluno.getEmail()).id(aluno.getId()).build();
+        Optional<Aluno> alunoOptional = this.repository.findById(id);
+        if (alunoOptional.isPresent()) {
+            Aluno aluno = alunoOptional.get();
+            return new AlunoDTO.AlunoDTOBuilder().nome(aluno.getNome()).email(aluno.getEmail()).id(aluno.getId()).build();
+        }
+        return new AlunoDTO.AlunoDTOBuilder().build();
     }
 
     public void remove(long id) {
         Optional<Aluno> alunoOptional = repository.findById(id);
-        repository.delete(alunoOptional.get());
+        alunoOptional.ifPresent(aluno -> repository.delete(aluno));
     }
 }
